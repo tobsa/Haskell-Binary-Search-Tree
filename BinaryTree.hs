@@ -26,11 +26,22 @@ tree7 = Node 13 tree3 tree4
 tree8 = Node 16 tree7 tree6
 
 ------------------------------------------------------------
+-- treeInsert
+-- Insert an element into a tree
+------------------------------------------------------------
+treeInsert :: (Ord a,Show a) => BinaryTree a -> a -> BinaryTree a
+treeInsert Empty x = Node x Empty Empty
+treeInsert (Node x left right) v
+    | v == x = Node x left right
+    | v < x  = Node x (treeInsert left v) right
+    | v > x  = Node x left (treeInsert right v)
+
+------------------------------------------------------------
 -- treeMember
 -- Check if an element is in a tree
 ------------------------------------------------------------
 treeMember :: (Ord a,Show a) => BinaryTree a -> a -> Bool
-treeMember Empty _                = False
+treeMember Empty _ = False
 treeMember (Node x left right) v 
     | v == x = True
     | v < x  = treeMember left v
@@ -41,7 +52,7 @@ treeMember (Node x left right) v
 -- Return the height of the tree
 ------------------------------------------------------------
 treeHeight :: (Ord a, Show a) => BinaryTree a -> Integer
-treeHeight Empty               = 0
+treeHeight Empty = 0
 treeHeight (Node x left right) = 1 + max (treeHeight left) (treeHeight right)
 
 
