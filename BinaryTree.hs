@@ -5,7 +5,7 @@
 ------------------------------------------------------------
 -- Module exports
 ------------------------------------------------------------
-module BinTree (treeMember) where
+module BinTree (treeMember,treeHeight) where
 
 ------------------------------------------------------------
 -- Define a binary tree
@@ -23,14 +23,26 @@ tree4 = Node 15 Empty Empty
 tree5 = Node 20 Empty Empty
 tree6 = Node 25 Empty Empty
 tree7 = Node 13 tree3 tree4
+tree8 = Node 16 tree7 tree6
 
 ------------------------------------------------------------
 -- treeMember
 -- Check if an element is in a tree
 ------------------------------------------------------------
 treeMember :: (Ord a,Show a) => BinaryTree a -> a -> Bool
-treeMember Empty _ = False
-treeMember tree x  = True
+treeMember Empty _                = False
+treeMember (Node x left right) v 
+    | v == x = True
+    | v < x  = treeMember left v
+    | v > x  = treeMember right v
+
+------------------------------------------------------------
+-- treeHeight
+-- Return the height of the tree
+------------------------------------------------------------
+treeHeight :: (Ord a, Show a) => BinaryTree a -> Integer
+treeHeight Empty               = 0
+treeHeight (Node x left right) = 1 + max (treeHeight left) (treeHeight right)
 
 
 
