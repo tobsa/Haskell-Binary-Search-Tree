@@ -12,7 +12,8 @@ module BinTree (treeInsert,
                 treeBuild,
                 treePreorder,
                 treeInorder,
-                treePostorder) 
+                treePostorder,
+                treeSort) 
                 where
 ------------------------------------------------------------
 
@@ -171,4 +172,19 @@ treePostorder Empty = []
 
 -- Produce the postorder list
 treePostorder (Node x left right) = treePostorder left ++ treePostorder right ++ [x]
+------------------------------------------------------------
+
+
+
+------------------------------------------------------------
+-- treeSort
+-- Sort a list
+------------------------------------------------------------
+treeSort :: (Ord a,Show a) => [a] -> [a]
+
+-- Get an empty list if the list already is empty
+treeSort [] = []
+
+-- Sort a list
+treeSort xs = treeInorder (treeBuild xs)
 ------------------------------------------------------------
