@@ -5,7 +5,15 @@
 ------------------------------------------------------------
 -- Module exports
 ------------------------------------------------------------
-module BinTree (treeInsert,treeMember,treeHeight,treeDelete) where
+module BinTree (treeInsert,
+                treeMember,
+                treeHeight,
+                treeDelete,
+                treeBuild,
+                treePreorder,
+                treeInorder,
+                treePostorder) 
+                where
 ------------------------------------------------------------
 
 ------------------------------------------------------------
@@ -75,6 +83,21 @@ treeDelete (Node x left right) v
 
 
 ------------------------------------------------------------
+-- treeBuild
+-- Build a binary tree from a given list
+------------------------------------------------------------
+treeBuild :: (Ord a,Show a) => [a] -> BinaryTree a
+
+-- Get an empty tree if the list is empty
+treeBuild [] = Empty
+
+-- Build a tree from a list
+treeBuild xs = foldl treeInsert Empty xs
+------------------------------------------------------------
+
+
+
+------------------------------------------------------------
 -- treeMember
 -- Check if an element is in a tree
 ------------------------------------------------------------
@@ -103,4 +126,49 @@ treeHeight Empty = 0
 
 -- Otherwise calculate the height of the tree
 treeHeight (Node x left right) = 1 + max (treeHeight left) (treeHeight right)
+------------------------------------------------------------
+
+
+
+------------------------------------------------------------
+-- treePreorder
+-- Get a list of all the elements inorder
+------------------------------------------------------------
+treePreorder :: (Ord a,Show a) => BinaryTree a -> [a]
+
+-- Handle empty tree
+treePreorder Empty = []
+
+-- Produce the preorder list
+treePreorder (Node x left right) = [x] ++ treePreorder left ++ treePreorder right
+------------------------------------------------------------
+
+
+
+------------------------------------------------------------
+-- treeInorder
+-- Get a list of all the elements inorder
+------------------------------------------------------------
+treeInorder :: (Ord a,Show a) => BinaryTree a -> [a]
+
+-- Handle empty tree
+treeInorder Empty = []
+
+-- Produce the inorder list
+treeInorder (Node x left right) = treeInorder left ++ [x] ++ treeInorder right
+------------------------------------------------------------
+
+
+
+------------------------------------------------------------
+-- treePostorder
+-- Get a list of all the elements inorder
+------------------------------------------------------------
+treePostorder :: (Ord a,Show a) => BinaryTree a -> [a]
+
+-- Handle empty tree
+treePostorder Empty = []
+
+-- Produce the postorder list
+treePostorder (Node x left right) = treePostorder left ++ treePostorder right ++ [x]
 ------------------------------------------------------------
