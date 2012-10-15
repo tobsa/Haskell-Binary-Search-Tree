@@ -10,6 +10,7 @@ module BinTree (treeInsert,
                 treeHeight,
                 treeDelete,
                 treeBuild,
+                treeCount,
                 treePreorder,
                 treeInorder,
                 treePostorder,
@@ -127,6 +128,22 @@ treeHeight Empty = 0
 
 -- Otherwise calculate the height of the tree
 treeHeight (Node x left right) = 1 + max (treeHeight left) (treeHeight right)
+------------------------------------------------------------
+
+
+
+------------------------------------------------------------
+-- treeCount
+-- Get the amount of nodes in the tree
+------------------------------------------------------------
+treeCount :: (Ord a, Show a) => BinaryTree a -> Int
+
+-- There's no nodes on a empty tree
+treeCount Empty = 0
+
+-- Calculate the amount of nodes
+treeCount (Node x left right) = 1 + (treeCount left) + (treeCount right)
+
 ------------------------------------------------------------
 
 
